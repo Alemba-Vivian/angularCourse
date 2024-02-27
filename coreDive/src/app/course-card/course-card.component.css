@@ -32,6 +32,10 @@ encapsulation mechanism that allow us to target the host component itself */
     background: lightsalmon;
 }
 
+:host-context(.salmon-theme) .course-card{
+    background-color: lightsalmon;
+}
+
 .course-card {
     margin-bottom: 40px;
     text-align: center;
