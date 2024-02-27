@@ -1,0 +1,93 @@
+<div class="top-menu">
+  <img
+    class="logo"
+    src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png"
+  />
+</div>
+
+<!-- <button (click)="onCourseEditer()">Edit Courses</button> -->
+
+<div class="demo">
+  <!-- <div>Start Date: {{startDaate | date:'MM/dd/yyyy'}}</div>
+   <div>{{title | uppercase}}</div>
+   <div>{{price | currency}}</div> -->
+</div>
+
+<!-- <h1>{{ngrxCourse.description}}</h1> -->
+<!-- 
+{{courses | json}} -->
+
+<div class="courses" *ngIf="courses[0] as course">
+
+
+  <ng-template #noImage let-courseName="description">
+    <p class="warn">{{ courseName}} image is not available</p>
+
+    <img src="/assets/empty-image.png" alt="" />
+  </ng-template>
+
+
+
+  <!-- <div *ngTemplateOutlet="noImage; context: {description: course.description}"></div> -->
+
+  <course-card
+   [course]="course" (courseSelected)="onCourseSelected($event)"  [noImageTemplate]="noImage">
+
+
+
+    <course-image [src]="course.iconUrl"> </course-image>
+
+    <!-- <course-image [src]="courses[1].iconUrl"> </course-image>
+
+    <course-image [src]="courses[2].iconUrl"> </course-image> -->
+
+    <div class="course-description">
+      {{ course.longDescription }}
+    </div>
+
+    <!-- Edit description: <textarea name="" id=""></textarea> -->
+  </course-card>
+
+  <!-- <course-card 
+          [course]="courses[1]" [index]=""
+          (courseSelected)="onCourseSelected($event)">
+
+      
+
+         <h3>Total lessons: 10</h3>
+
+   </course-card> -->
+
+  <!-- <course-card  #cardRef2
+   [course]="courses[1]" [index]=""
+   (courseSelected)="onCourseSelected($event)">
+   </course-card> -->
+
+  <!-- @for (course of courses; track course.id; let index=$index; let count=$count; let first=$first;  -->
+  <!-- let last=$last; let even=$even; let odd=$odd) { -->
+
+  <!-- [class.is-first]="first"
+            [class.is-last]="last"
+            [class.is-even]="even"
+            [class.is-odd]="odd" -->
+
+  <!-- <course-card 
+        [course]="course"
+        [index]="index"
+       
+        (courseSelected)="onCourseSelected($event)"  /> -->
+  <!-- }
+   @empty {
+      <h1>No elements found</h1>
+   } -->
+
+  <!-- <course-card *ngFor="let course of courses; index as i; first as isFirst  ; last as isLast; 
+      even as isEven; odd as isOdd"
+        [course]="course" 
+        [cardIndex]="i + 1" 
+        [class.is-first]="isFirst"
+        [class.is-last]="isLast"
+        [class.is-even]="isEven"
+        [class.is-odd]="isOdd"
+        (courseSelected)="onCourseSelected($event)" /> -->
+</div>

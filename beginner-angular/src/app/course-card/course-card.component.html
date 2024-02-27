@@ -1,0 +1,73 @@
+<div class="course-card" *ngIf="course" #container
+       [ngClass]="cardClasses()"
+      >
+
+    <div class="course-title"  [ngStyle]="cardStyles()">
+     {{index || ''+ ' '+ course.description }}
+    </div>
+
+
+    <ng-content select="course-image"
+              *ngIf="course.iconUrl; else blankImage">
+    
+    </ng-content>
+
+    <ng-template #blankImage>
+
+        <ng-container *ngTemplateOutlet="noImageTemplate; context: {description: course.description}">
+
+         </ng-container>
+    </ng-template>
+
+    <ng-content select=".course-description"></ng-content>
+
+    <ng-content></ng-content>
+
+
+    <!-- <img #courseImage width="300" alt="Angular Logo" *ngIf="noImageIsVisible() else noImage"
+    [src]="course.iconUrl"> -->
+
+  
+
+
+
+    <!-- @if(course.id ==1){
+      <h2>Course with ID 1 detected</h2>
+    }
+
+    @else if (course.iconUrl) {
+      <img width="300" alt="Angular Logo"
+      [src]="course.iconUrl">
+
+    }
+    @else {
+      <h2>No image available!</h2>
+
+    } -->
+
+
+    
+
+
+    <div class="course-category">
+      @switch (course.category) {
+        @case ('BEGINNER') {
+          <div class="category">Beginner</div>
+        }
+        @case ('INTERMEDIATE') {
+          <div class="category">Intermediate</div>
+        }
+        @case ('ADVANCED') {
+          <div class="category">Advanced</div>
+        }
+        @default {
+          <div class="category">Unknown</div>
+        }
+
+      }
+
+    </div>
+
+    <button (click)="onCourseViewed()">View Course</button>
+
+</div>
