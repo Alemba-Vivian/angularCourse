@@ -3,12 +3,26 @@ import { Observable } from 'rxjs';
 import { Course } from '../model/course';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
+let counter = 0;
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
+  useFactory: (http)=> new CoursesService(http),
+  deps: [
+    HttpClient
+  ]
 })
 export class CoursesService {
 
+  id:number;
+
   constructor(private http:HttpClient) { 
+
+    counter ++;
+
+    this.id=counter;
+
+    // console.log("create courses service " + counter);
   
   }
     //Defining API our of our service
