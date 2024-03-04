@@ -27,14 +27,14 @@ import { APP_CONFIG, AppConfig, CONFIG_TOKEN } from './config';
   // ]
 
 
-  // providers: [
-  //   CoursesService
-  // //   {
-  // //   provide: CoursesService,
-  // //   useClass: CoursesService
-  // // }
+  providers: [
+    CoursesService
+  //   {
+  //   provide: CoursesService,
+  //   useClass: CoursesService
+  // }
 
-  // ]
+  ]
 
 })
 export class AppComponent implements OnInit {

@@ -10,6 +10,8 @@ import {
     OnInit,
     Output,
     QueryList,
+    Self,
+    SkipSelf,
     ViewEncapsulation,
     inject
 } from '@angular/core';
@@ -22,7 +24,7 @@ import { CoursesService } from '../services/courses.service';
     selector: 'course-card',
     templateUrl: './course-card.component.html',
     styleUrls: ['./course-card.component.css'],
-    // providers:[CoursesService]
+    providers:[CoursesService]
 })
 export class CourseCardComponent implements OnInit {
 
@@ -36,7 +38,7 @@ export class CourseCardComponent implements OnInit {
     courseEmitter = new EventEmitter<Course>();
 
 
-    constructor( private coursesService: CoursesService) {
+    constructor( @SkipSelf() private coursesService: CoursesService) {
 
     }
 
