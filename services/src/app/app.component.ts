@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Inject, InjectionToken, OnInit, QueryList, ViewChild, ViewChildren, inject} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Inject, InjectionToken, OnInit, QueryList, ViewChild, ViewChildren, inject} from '@angular/core';
 import {COURSES} from '../db-data';
 import {Course} from './model/course';
 import {CourseCardComponent} from './course-card/course-card.component';
@@ -22,28 +22,30 @@ import { APP_CONFIG, AppConfig, CONFIG_TOKEN } from './config';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  // changeDetection:ChangeDetectionStrategy.OnPush
   // providers: [
   //   {provide:CONFIG_TOKEN, useValue: APP_CONFIG}
   // ]
 
 
-  providers: [
-    CoursesService
-  //   {
-  //   provide: CoursesService,
-  //   useClass: CoursesService
-  // }
+  // providers: [
+  //   CoursesService
+  // //   {
+  // //   provide: CoursesService,
+  // //   useClass: CoursesService
+  // // }
 
-  ]
+  // ]
 
 })
 export class AppComponent implements OnInit {
-
-
+  // when loading data from the hard coded db
   // courses = COURSES;
 
+  //when loading data from the database
   courses$:Observable<Course[]>;
-  // courses;
+
+  // courses:Course[];
 
 
 
@@ -51,7 +53,7 @@ export class AppComponent implements OnInit {
     // @Inject(CONFIG_TOKEN) private config: AppConfig) 
     // console.log("root component " + this.coursesService.id)
     
-    console.log(config);
+    // console.log(config);
 
   }
 
@@ -80,14 +82,26 @@ export class AppComponent implements OnInit {
     // Fetching Data using the custom service
     this.courses$ =this.coursesService.loadCourses();
 
+    // this.coursesService.loadCourses().subscribe(courses=>this.courses=courses);
+
   }
+
+  onEditCourse() {
+
+    //creating a reference for the object we want to modify
+    // const course = this.courses[0]
+    // const newCourse:any = {...course}
+
+    // newCourse.description = 'New Value!';
+    // this.courses[0] =newCourse;
+    }
+
+
   save(course:Course){
     this.coursesService.saveCourse(course)
        .subscribe(
           ()=>console.log("The course was saved successfully")
        )
   }
-
-
 
 }
