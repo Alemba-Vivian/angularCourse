@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Inject, InjectionToken, OnInit, QueryList, ViewChild, ViewChildren, inject} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, ElementRef, Inject, InjectionToken, OnInit, QueryList, ViewChild, ViewChildren, inject} from '@angular/core';
 import {COURSES} from '../db-data';
 import {Course} from './model/course';
 import {CourseCardComponent} from './course-card/course-card.component';
@@ -43,19 +43,35 @@ export class AppComponent implements OnInit {
   // courses = COURSES;
 
   //when loading data from the database
-  courses$:Observable<Course[]>;
+  // courses$:Observable<Course[]>;
 
-  // courses:Course[];
+  courses:Course[];
+
+  // loaded=false;
 
 
 
-  constructor( private coursesService: CoursesService, @Inject(CONFIG_TOKEN) private config: AppConfig ){
+  constructor( private coursesService: CoursesService,
+     @Inject(CONFIG_TOKEN) private config: AppConfig, /*private cd: ChangeDetectorRef*/ ){
     // @Inject(CONFIG_TOKEN) private config: AppConfig) 
     // console.log("root component " + this.coursesService.id)
     
     // console.log(config);
 
   }
+  // ngDoCheck(){
+  //   // console.log("ngDoCheck");
+
+
+  //   // //checking if the data is loaded from the backend
+  //   // if(this.loaded){
+  //   //    this.cd.markForCheck()
+  //   //    console.log("called for cd.markForCheck()")
+  //   //    this.loaded =undefined;
+  //   // }
+ 
+
+  // }
 
   // ngOnInit is the best way to put our initialization logic
   //e.g triggering a backend http call
@@ -80,9 +96,14 @@ export class AppComponent implements OnInit {
 
 
     // Fetching Data using the custom service
-    this.courses$ =this.coursesService.loadCourses();
+    // this.courses$ =this.coursesService.loadCourses();
 
-    // this.coursesService.loadCourses().subscribe(courses=>this.courses=courses);
+    this.coursesService.loadCourses().subscribe(courses=>
+      {
+        this.courses=courses;
+
+        // this.loaded =true;
+      });
 
   }
 

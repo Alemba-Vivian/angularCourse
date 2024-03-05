@@ -1,6 +1,7 @@
 import {
     AfterContentInit,
     AfterViewInit,
+    Attribute,
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
@@ -40,7 +41,10 @@ export class CourseCardComponent implements OnInit {
     courseEmitter = new EventEmitter<Course>();
 
 
-    constructor( @SkipSelf() private coursesService: CoursesService) {
+    constructor( @SkipSelf() private coursesService: CoursesService, 
+                @Attribute('type') private type:string) {
+
+                    console.log(type);
 
     }
 

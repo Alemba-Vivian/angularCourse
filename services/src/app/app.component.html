@@ -12,10 +12,11 @@
 <div>
 <!-- when loading data from the database -->
   <!-- *ngIf="courses$ | async as courses" -->
-  <div class="courses" *ngIf="courses$ | async as courses">
+  <div class="courses">
 
     <course-card  *ngFor="let course of courses"
                  (courseChanged)="save($event)"
+                  type="'beginner'"
                  [course]="course">
 
       <course-image [src]="course.iconUrl"></course-image>
