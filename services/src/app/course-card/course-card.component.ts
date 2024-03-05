@@ -1,18 +1,24 @@
 import {
+    AfterContentChecked,
     AfterContentInit,
+    AfterViewChecked,
     AfterViewInit,
     Attribute,
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
+    DoCheck,
     ElementRef,
     EventEmitter,
     Inject,
     Input,
+    OnChanges,
+    OnDestroy,
     OnInit,
     Output,
     QueryList,
     Self,
+    SimpleChanges,
     SkipSelf,
     ViewEncapsulation,
     inject
@@ -29,7 +35,9 @@ import { CoursesService } from '../services/courses.service';
     // providers:[CoursesService]
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CourseCardComponent implements OnInit {
+export class CourseCardComponent implements OnInit, 
+OnDestroy, OnChanges, AfterContentChecked, AfterViewChecked,
+ AfterContentInit, AfterViewInit, DoCheck {
 
     @Input()
     course: Course;
@@ -44,15 +52,60 @@ export class CourseCardComponent implements OnInit {
     constructor( @SkipSelf() private coursesService: CoursesService, 
                 @Attribute('type') private type:string) {
 
-                    console.log(type);
+                    // console.log(type);
+
+                    console.log("constructor", this.course);
 
     }
-
+    
+  
+   
     ngOnInit() {
         // console.log("CourseService course card",this.coursesService.id);
+        console.log("ngOnInit", this.course);
 
     }
 
+
+    ngOnDestroy(){
+
+        console.log("NGOnDestroy");
+   
+    }
+
+    ngOnChanges(changes){
+        console.log("ngOnChanges", changes);
+    }
+
+     ngAfterContentChecked(){
+
+       console.log("ngAfterContentChecked");
+
+    //    this.course.description ='ngAfterContentChecked';
+    //    this.course.category ='Advanced';
+    //    this.course.iconUrl ='';
+    }
+
+
+
+    ngAfterViewChecked(){
+         console.log("ngAfterViewChecked");
+
+        //  this.course.description ='ngAfterViewChecked';
+    }
+
+    ngAfterContentInit(){
+        console.log(" ngAfterContentInit")
+    }
+
+    ngAfterViewInit(){
+        console.log("ngAfterViewInit");
+    }
+
+    ngDoCheck(){
+       console.log("ngDoCheck")
+    }
+   
 
     onTitleChanged(newTitle:string){
         this.course.description =newTitle;

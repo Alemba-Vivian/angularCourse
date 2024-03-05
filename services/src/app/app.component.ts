@@ -45,7 +45,9 @@ export class AppComponent implements OnInit {
   //when loading data from the database
   // courses$:Observable<Course[]>;
 
-  courses:Course[];
+  // courses:Course[];
+
+  courses:Course[]=COURSES;
 
   // loaded=false;
 
@@ -98,12 +100,12 @@ export class AppComponent implements OnInit {
     // Fetching Data using the custom service
     // this.courses$ =this.coursesService.loadCourses();
 
-    this.coursesService.loadCourses().subscribe(courses=>
-      {
-        this.courses=courses;
+    // this.coursesService.loadCourses().subscribe(courses=>
+    //   {
+    //     this.courses=courses;
 
-        // this.loaded =true;
-      });
+    //     // this.loaded =true;
+    //   });
 
   }
 
@@ -115,6 +117,14 @@ export class AppComponent implements OnInit {
 
     // newCourse.description = 'New Value!';
     // this.courses[0] =newCourse;
+
+
+    const course = this.courses[0]
+    const newCourse:any = {...course, description:'ngOnChanges'}
+    this.courses[0] =newCourse;
+
+
+
     }
 
 
